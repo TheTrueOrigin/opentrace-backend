@@ -9,7 +9,7 @@ from pydantic import BaseModel
 from typing import List
 
 # Download latest database
-from utils import download_latest_database
+from .utils import download_latest_database
 download_latest_database()
 
 db_pfad = os.path.join(os.path.dirname(__file__), "database.db")
@@ -94,13 +94,13 @@ def get_product(product_id):
     cursor.execute("SELECT * FROM Produkte WHERE id = ?", (product_id,))
     result_product = cursor.fetchone()
     if not result_product:
-        return None
+        return {}
     
     # Unternehmen    
     cursor.execute("SELECT * FROM Unternehmen WHERE id = ?", (result_product[1],))
     result_unternehmen = cursor.fetchone()
     if not result_unternehmen:
-        return None
+        return {}
     unternehmen = {
         "Name": result_unternehmen[1],
         "Land": result_unternehmen[2],
@@ -177,15 +177,19 @@ def get_item(id: int):
 def get_item(barcode: str):
     product_id = barcode_to_id(barcode)
     if not product_id:
-        return None
+        return {}
     return get_product(product_id)
 
 # Return Produkt JSON with Produkt Name
 @app.get("/produkt/name/{name}")
 def get_item(name: str):
+    ids1 = name_to_id(name)
+    ids2 = company_to_ids(name)
+    if not ids1 or not ids2:
+        return {}
     produkte = list(set(name_to_id(name)+(company_to_ids(name))))
     if not produkte:
-        return None
+        return {}
     
     _produkte = []
     for produkt in produkte:
