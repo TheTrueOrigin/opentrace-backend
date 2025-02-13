@@ -7,7 +7,6 @@ Das Backend stellt sicher, dass die App stets mit den aktuellsten Daten versorgt
 - GET `/produkt/id/{id}` - Gibt das Produkt mit jeweiliger ID im JSON-Format aus
 - GET `/produkt/barcode/{barcode}` - Gibt das Produkt mit jeweiligem Barcode im JSON-Format aus
 - GET `/produkt/name/{name}` - Gibt Produkte mit ähnlichem Namen im JSON-Format aus
-- POST `/produkt/create` - Erstelle ein Produkt
 
 ## Produkt JSON-Schema
 Beispiel: `Meßmer Tee Klassik`
