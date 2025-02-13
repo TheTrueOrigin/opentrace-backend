@@ -1,12 +1,16 @@
 ### Imports ###
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+
 import sqlite3
 import os
-import re
-import base64
+
 from pydantic import BaseModel
 from typing import List
+
+# Download latest database
+from utils import download_latest_database
+download_latest_database()
 
 db_pfad = os.path.join(os.path.dirname(__file__), "database.db")
 
