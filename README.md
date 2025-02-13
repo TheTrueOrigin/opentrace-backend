@@ -3,6 +3,8 @@ Das OpenTrace Backend ist ein Open-Source-Projekt, das die neueste Version der O
 
 Das Backend stellt sicher, dass die App stets mit den aktuellsten Daten versorgt wird, indem es die Datenbank regelmäßig aktualisiert und über eine API zugänglich macht.
 
+Um selbst ein Produkt hinzuzufügen, folge die Anweisungen auf [opentrace-database](https://github.com/TheTrueOrigin/opentrace-database?tab=readme-ov-file#eigenen-beitrag).
+
 ## Endpunkte
 - GET `/produkt/id/{id}` - Gibt das Produkt mit jeweiliger ID im JSON-Format aus
 - GET `/produkt/barcode/{barcode}` - Gibt das Produkt mit jeweiligem Barcode im JSON-Format aus
