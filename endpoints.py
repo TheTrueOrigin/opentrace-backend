@@ -4,7 +4,6 @@ from fastapi.middleware.cors import CORSMiddleware
 
 import sqlite3
 import os
-from typing import List
 
 # Download latest database
 from utils import download_latest_database
