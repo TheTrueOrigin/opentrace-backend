@@ -4,48 +4,13 @@ from fastapi.middleware.cors import CORSMiddleware
 
 import sqlite3
 import os
-
-from pydantic import BaseModel
 from typing import List
 
 # Download latest database
-from .utils import download_latest_database
+from utils import download_latest_database
 download_latest_database()
 
 db_pfad = os.path.join(os.path.dirname(__file__), "database.db")
-
-class Unternehmen(BaseModel):
-    Name: str
-    Land: str
-    Gründung: int
-    Website: str
-
-class Nährwerte(BaseModel):
-    Brennwert: str
-    Fettgehalt: str
-    Gesättigte_Fettsäuren: str
-    Kohlenhydrate: str
-    Zuckergehalt: str
-    Eiweißgehalt: str
-    Salzgehalt: str
-
-class Bestandteil(BaseModel):
-    Name: str
-    Herstellungsort: str
-    Unternehmen: Unternehmen
-
-class Produkt(BaseModel):
-    Name: str
-    Unternehmen: Unternehmen
-    Barcode: str
-    Bild: str # Base64
-    Größe: str
-    Kategorie: str
-    Herstellungsort: str
-    Nährwerte: Nährwerte
-    Labels: List[str]
-    Allergene: List[str]
-    Bestandteile: List[Bestandteil]
 
 # FastAPI app
 app = FastAPI()
@@ -70,7 +35,8 @@ def name_to_id(name):
     result = cursor.fetchall() #ID
     if not result:
         return None
-    return [i[0] for i in result]
+    r = [i[0] for i in result]
+    return r
 
 # Produkt Barcode -> Proddukt ID
 def barcode_to_id(barcode):
@@ -85,7 +51,8 @@ def company_to_ids(name):
     company_ids = [result[0] for result in results]
     placeholders = ", ".join("?" * len(company_ids))
     cursor.execute(f"SELECT id from Produkte WHERE Unternehmen_ID IN ({placeholders})", company_ids)
-    return [i[0] for i in cursor.fetchall()]
+    r = [i[0] for i in cursor.fetchall()]
+    return r
 
 # ProduktID -> JSON
 def get_product(product_id):
@@ -185,9 +152,9 @@ def get_item(barcode: str):
 def get_item(name: str):
     ids1 = name_to_id(name)
     ids2 = company_to_ids(name)
-    if not ids1 or not ids2:
+    if not ids1 and not ids2:
         return {}
-    produkte = list(set(name_to_id(name)+(company_to_ids(name))))
+    produkte = list(set(ids1+ids2))
     if not produkte:
         return {}
     
