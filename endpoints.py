@@ -60,7 +60,9 @@ def get_product(product_id):
     cursor.execute("SELECT * FROM Produkte WHERE id = ?", (product_id,))
     result_product = cursor.fetchone()
     if not result_product:
-        return {}
+        cursor.execute('SELECT * FROM Produkte WHERE name = ?', ("Unbekannt",))
+        result_product = cursor.fetchone()
+        product_id = result_product[0]
     
     # Unternehmen    
     cursor.execute("SELECT * FROM Unternehmen WHERE id = ?", (result_product[1],))
@@ -143,7 +145,7 @@ def get_item(id: int):
 def get_item(barcode: str):
     product_id = barcode_to_id(barcode)
     if not product_id:
-        return {}
+        return get_product(0)
     return get_product(product_id)
 
 # Return Produkt JSON with Produkt Name
@@ -161,6 +163,18 @@ def get_item(name: str):
     for produkt in produkte:
         _produkte.append(get_product(produkt))
     return _produkte
+
+@app.get("/update_datenbank")
+def update_datenbank():
+    global conn, cursor
+    if cursor:
+        cursor.close()
+    if conn:
+        conn.close()
+    download_latest_database()
+    conn = sqlite3.connect(db_pfad, check_same_thread=False)
+    cursor = conn.cursor()
+
 
 @app.on_event("shutdown")
 def shutdown():
