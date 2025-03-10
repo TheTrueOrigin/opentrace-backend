@@ -161,7 +161,9 @@ def get_item(name: str):
     
     _produkte = []
     for produkt in produkte:
-        _produkte.append(get_product(produkt))
+        produkt_info = get_product(produkt)
+        if produkt_info["Name"] != "Unbekannt":
+            _produkte.append(get_product(produkt))
     return _produkte
 
 @app.get("/update_datenbank")
