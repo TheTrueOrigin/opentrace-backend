@@ -79,4 +79,4 @@ Beispiel: `Meßmer Tee Klassik`
 1. Fast-API installieren mit `pip install fastapi`
 2. Webserver starten mit `python -m fastapi run endpoints.py`
 
-Der Server startet unter dem Port 8000
+Der Server startet auf Port 8000
