@@ -12,7 +12,7 @@ download_latest_database()
 db_pfad = os.path.join(os.path.dirname(__file__), "database.db")
 
 # FastAPI app
-app = FastAPI()
+app = FastAPI(docs_url=None, redoc_url=None)
 
 app.add_middleware(
     CORSMiddleware,
