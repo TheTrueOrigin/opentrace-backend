@@ -152,13 +152,9 @@ def get_product(product_id):
             "Eiweißgehalt": result_product[13],
             "Salzgehalt": result_product[14],
         },
-        "Labels": ["-"],
-        "Allergene": ["-"],
-        "Bestandteile": [{
-            "Name": "-",
-            "Herstellungsort": "-",
-            "Unternehmen": "-"
-        }]
+        "Labels": labels,
+        "Allergene": allergene,
+        "Bestandteile": bestandteile
     }
 
 ### Endpoints
@@ -191,9 +187,13 @@ def get_item(barcode: str):
                 "Eiweißgehalt": "-",
                 "Salzgehalt": "-",
             },
-            "Labels": labels,
-            "Allergene": allergene,
-            "Bestandteile": bestandteile
+            "Labels": ["-"],
+            "Allergene": ["-"],
+            "Bestandteile": [{
+                "Name": "-",
+                "Herstellungsort": "-",
+                "Unternehmen": "-"
+            }]
         }
     return get_product(product_id)
 
