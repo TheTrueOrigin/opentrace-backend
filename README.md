@@ -11,7 +11,7 @@ Um selbst ein Produkt hinzuzufügen, folge die Anweisungen auf [opentrace-databa
 - GET `/produkt/name/{name}` - Gibt Produkte mit ähnlichem Namen im JSON-Format aus
 
 ## Produkt JSON-Schema
-Beispiel: `Meßmer Tee Klassik`
+Beispiel: `Andechser Natur Bio Joghurt mild 3,8% Fett 500g`
 ```json
 {
   "Emission": 0.02912519400000001,
@@ -25,6 +25,7 @@ Beispiel: `Meßmer Tee Klassik`
   },
   "Barcode": "4104060024757",
   "Größe": "500g",
+  "Gesamtgewicht": 0.523,
   "Kategorie": "Joghurt",
   "Herstellungsort": "Andechs Bayern Deutschland",
   "Nährwerte": {

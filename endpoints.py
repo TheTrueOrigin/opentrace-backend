@@ -2,6 +2,9 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+# db update
+from apscheduler.schedulers.background import BackgroundScheduler
+
 import sqlite3
 import os
 
@@ -13,6 +16,7 @@ db_pfad = os.path.join(os.path.dirname(__file__), "database.db")
 
 # FastAPI app
 app = FastAPI(docs_url=None, redoc_url=None)
+scheduler = BackgroundScheduler()
 
 app.add_middleware(
     CORSMiddleware,
@@ -27,6 +31,21 @@ conn = sqlite3.connect(db_pfad, check_same_thread=False)
 cursor = conn.cursor()
 
 ### Funktionen ###
+
+# Download latest db from Github
+def update_datenbank():
+    global conn, cursor
+    if cursor:
+        cursor.close()
+    if conn:
+        conn.close()
+    download_latest_database()
+    conn = sqlite3.connect(db_pfad, check_same_thread=False)
+    cursor = conn.cursor()
+
+# Update DB every day at midnight
+scheduler.add_job(update_datenbank, "cron", hour=0, minute=0)
+scheduler.start()
 
 # Produkt Name -> Produkt ID
 def name_to_id(name):
@@ -113,6 +132,7 @@ def get_product(product_id):
             "Unternehmen": _unternehmen_bestandteil
         })
 
+    # JSON-output
     return {
         "Emission": result_product[15],
         "Distanz": result_product[16],
@@ -120,6 +140,7 @@ def get_product(product_id):
         "Unternehmen": unternehmen,
         "Barcode": result_product[3],
         "Größe": result_product[4],
+        "Gesamtgewicht": result_product[5],
         "Kategorie": result_product[6],
         "Herstellungsort": result_product[7],
         "Nährwerte": {
@@ -150,7 +171,7 @@ def get_item(barcode: str):
         return get_product(0)
     return get_product(product_id)
 
-# Return Produkt JSON with Produkt Name
+# Return Produkt JSON with Produkt Name or Company Name
 @app.get("/produkt/name/{name}")
 def get_item(name: str):
     ids1 = name_to_id(name)
@@ -167,18 +188,6 @@ def get_item(name: str):
         if produkt_info["Name"] != "Unbekannt":
             _produkte.append(get_product(produkt))
     return _produkte
-
-@app.get("/update_datenbank")
-def update_datenbank():
-    global conn, cursor
-    if cursor:
-        cursor.close()
-    if conn:
-        conn.close()
-    download_latest_database()
-    conn = sqlite3.connect(db_pfad, check_same_thread=False)
-    cursor = conn.cursor()
-
 
 @app.on_event("shutdown")
 def shutdown():
