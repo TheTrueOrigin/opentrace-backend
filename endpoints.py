@@ -152,9 +152,13 @@ def get_product(product_id):
             "Eiweißgehalt": result_product[13],
             "Salzgehalt": result_product[14],
         },
-        "Labels": labels,
-        "Allergene": allergene,
-        "Bestandteile": bestandteile
+        "Labels": ["-"],
+        "Allergene": ["-"],
+        "Bestandteile": [{
+            "Name": "-",
+            "Herstellungsort": "-",
+            "Unternehmen": "-"
+        }]
     }
 
 ### Endpoints
@@ -168,7 +172,29 @@ def get_item(id: int):
 def get_item(barcode: str):
     product_id = barcode_to_id(barcode)
     if not product_id:
-        return get_product(0)
+        return {
+            "Emission": "-",
+            "Distanz": "-",
+            "Name": "Unbekannt",
+            "Unternehmen": "-",
+            "Barcode": barcode,
+            "Größe": "-",
+            "Gesamtgewicht": "-",
+            "Kategorie": "-",
+            "Herstellungsort": "-",
+            "Nährwerte": {
+                "Brennwert": "-",
+                "Fettgehalt": "-",
+                "Gesättigte_Fettsäuren": "-",
+                "Kohlenhydrate": "-",
+                "Zuckergehalt": "-",
+                "Eiweißgehalt": "-",
+                "Salzgehalt": "-",
+            },
+            "Labels": labels,
+            "Allergene": allergene,
+            "Bestandteile": bestandteile
+        }
     return get_product(product_id)
 
 # Return Produkt JSON with Produkt Name or Company Name

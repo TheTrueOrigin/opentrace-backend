@@ -93,7 +93,7 @@ Beispiel: `Andechser Natur Bio Joghurt mild 3,8% Fett 500g`
 ```
 
 ## Web-Server starten
-1. Fast-API installieren mit `pip install fastapi`
+1. Python-Pakete installieren mit `pip install -r requirements.txt`
 2. Webserver starten mit `python -m fastapi run endpoints.py`
 
 Der Server startet auf Port 8000
