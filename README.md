@@ -14,61 +14,77 @@ Um selbst ein Produkt hinzuzufügen, folge die Anweisungen auf [opentrace-databa
 Beispiel: `Meßmer Tee Klassik`
 ```json
 {
-  "Name": "Meßmer Tee Klassik",
+  "Emission": 0.02912519400000001,
+  "Distanz": 2458,
+  "Name": "Andechser Natur Bio Joghurt mild 3,8% Fett 500g",
   "Unternehmen": {
-    "Name": "Meßmer",
-    "Land": "Österreich",
-    "Gründung": 1990,
-    "Website": "meßmer.at"
+    "Name": "Andechser Natur",
+    "Land": "Deutschland",
+    "Gründung": 1908,
+    "Website": "andechser-natur.de"
   },
-  "Barcode": "4001257218503",
-  "Größe": "20pcs",
-  "Kategorie": "Tee",
-  "Herstellungsort": "Österreich",
+  "Barcode": "4104060024757",
+  "Größe": "500g",
+  "Kategorie": "Joghurt",
+  "Herstellungsort": "Andechs Bayern Deutschland",
   "Nährwerte": {
-    "Brennwert": "3kJ/1kcal",
-    "Fettgehalt": "0g",
-    "Gesättigte_Fettsäuren": "0g",
-    "Kohlenhydrate": "0.2g",
-    "Zuckergehalt": "0.1g",
-    "Eiweißgehalt": "0g",
-    "Salzgehalt": "0,01g"
+    "Brennwert": "273kJ/65kcal",
+    "Fettgehalt": "3,8g",
+    "Gesättigte_Fettsäuren": "2,6g",
+    "Kohlenhydrate": "3,7g",
+    "Zuckergehalt": "3,7g",
+    "Eiweißgehalt": "4,1g",
+    "Salzgehalt": "0,16g"
   },
   "Labels": [
-    "Glutenfrei"
+    "EU-Bio-Siegel",
+    "Bioland",
+    "Bayerisches Bio-Siegel",
+    "Klima-Bauer"
   ],
   "Allergene": [
-    "Histamin"
+    "Milch",
+    "Laktose"
   ],
   "Bestandteile": [
     {
-      "Name": "Nalli Silks Seide",
-      "Herstellungsort": "Indien",
+      "Name": "Europa dünnwandiger Kunststoffbecher",
+      "Herstellungsort": "Europa",
       "Unternehmen": {
-        "Name": "Nalli Silks",
-        "Land": "Indien",
-        "Gründung": 1990,
-        "Website": "nallisilks.com"
+        "Name": "Unbekannt",
+        "Land": "-",
+        "Gründung": "-",
+        "Website": "-"
       }
     },
     {
-      "Name": "Tata Tea Limited Schwarztee Blätter",
-      "Herstellungsort": "Indien",
+      "Name": "Europa Aluverbundplatine",
+      "Herstellungsort": "Europa",
       "Unternehmen": {
-        "Name": "Tata Tea Limited",
-        "Land": "Indien",
-        "Gründung": 1893,
-        "Website": "tata.com"
+        "Name": "Unbekannt",
+        "Land": "-",
+        "Gründung": "-",
+        "Website": "-"
       }
     },
     {
-      "Name": "Geissinger Karton Verpackung",
-      "Herstellungsort": "Österreich",
+      "Name": "Bio-Milch Alpenvorland",
+      "Herstellungsort": "Bayern Deutschland",
       "Unternehmen": {
-        "Name": "Geissinger",
-        "Land": "Österreich",
-        "Gründung": 1990,
-        "Website": "geissinger.at"
+        "Name": "Unbekannt",
+        "Land": "-",
+        "Gründung": "-",
+        "Website": "-"
+      }
+    },
+    {
+      "Name": "Europa Papierbanderole",
+      "Herstellungsort": "Europa",
+      "Unternehmen": {
+        "Name": "Unbekannt",
+        "Land": "-",
+        "Gründung": "-",
+        "Website": "-"
       }
     }
   ]
