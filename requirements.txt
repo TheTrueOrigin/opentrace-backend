@@ -1,3 +1,4 @@
+requests
 APScheduler==3.11.0
 fastapi==0.115.11
 uvicorn[standard]==0.30.6
